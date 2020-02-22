@@ -27,9 +27,29 @@ bool AppCheckTests::http_get_string(std::string url, std::string needle)
 	return result;
 }
 
-bool AppCheckTests::tcp_check_port(int port, std::string protocol)
+bool AppCheckTests::check_port(std::string domain, long port)
 {
-	return false;
+	bool result = false;
+	std::string url = "telnet://" + domain;
+	CURLcode response;
+
+	CURL* curl = curl_easy_init();
+	if (curl) {
+		curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+		curl_easy_setopt(curl, CURLOPT_PROTOCOLS, CURLPROTO_TELNET);
+		curl_easy_setopt(curl, CURLOPT_PORT, port);
+		curl_easy_setopt(curl, CURLOPT_TIMEOUT, 1L);
+		curl_easy_setopt(curl, CURLOPT_CONNECTTIMEOUT, 1L);
+		
+		response = curl_easy_perform(curl);
+		curl_easy_cleanup(curl);
+	}
+
+	if (CURLE_OK == response) {
+		result = true;
+	}
+
+	return result;
 }
 
 size_t AppCheckTests::write_data(void* contents, size_t size, size_t nmemb, void* userp)
