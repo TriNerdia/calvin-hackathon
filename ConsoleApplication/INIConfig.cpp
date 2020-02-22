@@ -4,12 +4,33 @@
 #include <fstream>
 #include <algorithm>
 
-INIConfig::INIConfig(char* argv[]){
-    &INIConfig::iniValue;
-    //this->iniValue;
+// Constructor
+INIConfig::INIConfig(std::string filename)
+{
+
 }
 
-std::string INIConfig::iniValue(char* argv[]) 
+// Destructor
+INIConfig::~INIConfig()
+{
+}
+
+std::list<std::string> INIConfig::getVariables(std::string section)
+{
+    return std::list<std::string>();
+}
+
+std::list<std::string> INIConfig::getSections()
+{
+    return std::list<std::string>();
+}
+
+std::string INIConfig::getValue(std::string section, std::string variable)
+{
+    return std::string();
+}
+
+std::string INIConfig::iniValue(char* argv[])
 {
     std::ifstream config(argv[1]);
     std::cout << "iniValue test text";

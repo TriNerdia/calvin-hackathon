@@ -2,13 +2,22 @@
 #define _INI_CONFIG_
 
 #include <string>
+#include <list>
 
 class INIConfig
 {
 public:
-	INIConfig(char* argv[]);
+	INIConfig(std::string filename);
+	~INIConfig();
+
+	// Lists
+	std::list<std::string> getVariables(std::string section);
+	std::list<std::string> getSections();
+
+	// Single Values
+	std::string getValue(std::string section, std::string variable);
+
 	std::string iniValue(char* argv[]);
-	INIConfig(char*) {}
 };
 
 #endif // !_INI_CONFIG_
