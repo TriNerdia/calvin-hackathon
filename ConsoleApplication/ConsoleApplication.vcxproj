@@ -155,6 +155,9 @@
     <ClInclude Include="AppCheckTests.h" />
     <ClInclude Include="INIConfig.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="example-config.ini" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

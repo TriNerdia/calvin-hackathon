@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <map>
 #include "AppCheckTests.h"
 #include "INIConfig.h"
 using namespace std;
@@ -11,23 +12,9 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    AppCheckTests::http_get_string("http://hackathon.demonpig.net", "hello world");
-    
-   //INIConfig config = INIConfigManager::get_tests(argv[1]);
-   
-
-   INIConfig* iniValue = new INIConfig(argv[1]);
-   // config->get("port_test")
-    
-   cout << iniValue;
-        
-        cout << "\nthere are " << argc << " arguments \n" << endl;
-
-    for (int count{ 0 }; count < argc; ++count)
-    {
-        cout << count << " " << argv[count] << '\n';
-    }
-
-   
-    return 0;
+	std::map<std::string, std::string> data = INIConfig::parseConfig("example-config.ini", "general");
+	//for (auto i : data) {
+	//	std::cout << i.first << std::endl;
+	//	std::cout << i.second << std::endl;
+	//}
 }

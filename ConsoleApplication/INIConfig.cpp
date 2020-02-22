@@ -4,76 +4,48 @@
 #include <fstream>
 #include <algorithm>
 
-// Constructor
-INIConfig::INIConfig(std::string filename)
-{
-    this->configData = new std::map<std::string, std::map<std::string, std::string>>();
-}
-
-// Destructor
-INIConfig::~INIConfig()
-{
-    delete this->configData;
-}
-
-std::list<std::string> INIConfig::getVariables(std::string section)
-{
-    return std::list<std::string>();
-}
-
-std::list<std::string> INIConfig::getSections()
-{
-    return std::list<std::string>();
-}
-
-std::string INIConfig::getValue(std::string section, std::string variable)
-{
-    return std::string();
-}
-
-std::string INIConfig::iniValue(char* argv[])
-{
-    std::ifstream config(argv[1]);
-    std::cout << "iniValue test text";
-    if (config.is_open())
-    {
-        int valuePos;
-        std::string text;
-        std::string value;
-        while (getline(config, text))
-        {
-            text.erase(std::remove_if(text.begin(), text.end(), isspace), text.end());
-
-            if (text[0] == '[' || text.empty() || text[0] == '#')
-                continue;
-
-            valuePos = text.find("=");
-            value = text.substr(valuePos + 1);
-
-            std::cout << value << std::endl;
-
-        }
-
-        std::cout << "\nconfig is open\n";
-    }
-
-    return "\nreturned\n";
-
-}
-
-void INIConfig::parseConfig(std::string filename)
+std::map<std::string, std::string> INIConfig::parseConfig(std::string filename, std::string section)
 {
     std::string line, key;
     std::map<std::string, std::string> variables;
 
+    // this flag is used to indicate when the loop should
+    // store variables in the map.
+    bool look_for_variables = false;
+
     std::ifstream file(filename);
     if (file.is_open()) {
         while (std::getline(file, line)) {
-            line.erase(std::remove_if(line.begin(), line.end(), isspace), line.end());
+            if (line.empty() || (line.length() > 0 && line[0] == '#')) {
+                continue;
+            }
+
             if (line[0] == '[') {
-                this->configData->insert()
+                look_for_variables = false;
+
+                // Cleaning up the string
+                line.erase(0);
+                line.erase(line.end());
+                line.erase(std::remove_if(line.begin(), line.end(), isspace), line.end());
+                if (line == section) {
+                    key = line;
+                    look_for_variables = true;
+                    continue;
+                }
+            }
+
+            if (look_for_variables) {
+                line.erase(std::remove_if(line.begin(), line.end(), isspace), line.end());
+                int delimiter = line.find("=");
+                std::string name = line.substr(0, delimiter);
+                std::string value = line.substr(delimiter + 1);
+                variables.insert(name, value);
             }
         }
+
+        file.close();
     }
+
+    return variables;
 }
 
