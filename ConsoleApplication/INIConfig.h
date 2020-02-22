@@ -3,6 +3,7 @@
 
 #include <string>
 #include <list>
+#include <map>
 
 class INIConfig
 {
@@ -18,6 +19,11 @@ public:
 	std::string getValue(std::string section, std::string variable);
 
 	std::string iniValue(char* argv[]);
+
+private:
+	std::map<std::string, std::map<std::string, std::string>>* configData;
+	void parseConfig(std::string filanem);
+
 };
 
 #endif // !_INI_CONFIG_

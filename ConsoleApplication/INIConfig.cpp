@@ -7,12 +7,13 @@
 // Constructor
 INIConfig::INIConfig(std::string filename)
 {
-
+    this->configData = new std::map<std::string, std::map<std::string, std::string>>();
 }
 
 // Destructor
 INIConfig::~INIConfig()
 {
+    delete this->configData;
 }
 
 std::list<std::string> INIConfig::getVariables(std::string section)
@@ -59,3 +60,20 @@ std::string INIConfig::iniValue(char* argv[])
     return "\nreturned\n";
 
 }
+
+void INIConfig::parseConfig(std::string filename)
+{
+    std::string line, key;
+    std::map<std::string, std::string> variables;
+
+    std::ifstream file(filename);
+    if (file.is_open()) {
+        while (std::getline(file, line)) {
+            line.erase(std::remove_if(line.begin(), line.end(), isspace), line.end());
+            if (line[0] == '[') {
+                this->configData->insert()
+            }
+        }
+    }
+}
+
