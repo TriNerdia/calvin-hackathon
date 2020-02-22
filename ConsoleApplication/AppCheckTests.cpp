@@ -11,7 +11,7 @@ bool AppCheckTests::http_get_string(std::string url, std::string needle)
 	CURL* curl = curl_easy_init();
 	if (curl) {
 		curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-		//curl_easy_setopt(curl, CURLOPT_VERBOSE, true);
+		curl_easy_setopt(curl, CURLOPT_VERBOSE, true);
 		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, AppCheckTests::write_data);
 		curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
 		response = curl_easy_perform(curl);
@@ -37,6 +37,7 @@ bool AppCheckTests::check_port(std::string domain, long port)
 	if (curl) {
 		curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
 		curl_easy_setopt(curl, CURLOPT_PROTOCOLS, CURLPROTO_TELNET);
+		curl_easy_setopt(curl, CURLOPT_VERBOSE, true);
 		curl_easy_setopt(curl, CURLOPT_PORT, port);
 		curl_easy_setopt(curl, CURLOPT_TIMEOUT, 1L);
 		curl_easy_setopt(curl, CURLOPT_CONNECTTIMEOUT, 1L);
