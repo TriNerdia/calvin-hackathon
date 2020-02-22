@@ -6,7 +6,7 @@
 
 std::map<std::string, std::string> INIConfig::parseConfig(std::string filename, std::string section)
 {
-    std::string line, key;
+    std::string line;
     std::map<std::string, std::string> variables;
 
     // this flag is used to indicate when the loop should
@@ -15,7 +15,7 @@ std::map<std::string, std::string> INIConfig::parseConfig(std::string filename, 
 
     std::ifstream file(filename);
     if (file.is_open()) {
-        while (std::getline(file, line)) {
+        while (getline(file, line)) {
             if (line.empty() || (line.length() > 0 && line[0] == '#')) {
                 continue;
             }
@@ -24,11 +24,9 @@ std::map<std::string, std::string> INIConfig::parseConfig(std::string filename, 
                 look_for_variables = false;
 
                 // Cleaning up the string
-                line.erase(0);
-                line.erase(line.end());
-                line.erase(std::remove_if(line.begin(), line.end(), isspace), line.end());
+                line.erase(std::remove_if(line.begin(), line.end(), ispunct), line.end());
+
                 if (line == section) {
-                    key = line;
                     look_for_variables = true;
                     continue;
                 }
@@ -39,7 +37,7 @@ std::map<std::string, std::string> INIConfig::parseConfig(std::string filename, 
                 int delimiter = line.find("=");
                 std::string name = line.substr(0, delimiter);
                 std::string value = line.substr(delimiter + 1);
-                variables.insert(name, value);
+                variables[name] = value;
             }
         }
 
