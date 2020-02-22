@@ -7,7 +7,7 @@ class AppCheckTests
 {
 public:
 	static bool http_get_string(std::string url, std::string needle);
-	static bool tcp_check_port(int port, std::string protocol);
+	static bool check_port(std::string domain, long port);
 
 private:
 	AppCheckTests() {}
