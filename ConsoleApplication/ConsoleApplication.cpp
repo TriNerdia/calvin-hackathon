@@ -24,20 +24,20 @@ int main(int argc, char *argv[])
 
     if (config.is_open())
    {
+        int valuePos;
         string text;
+        string value;
         while (getline(config, text))
         {
             text.erase(remove_if(text.begin(), text.end(), isspace), text.end());
 
-            if (text[0] == '#' || text.empty())
+            if (text[0] == '[' || text.empty() || text[0] == '#')
                 continue;
 
-            if (text == "Yes")
-            {
-                cout << "the text says yes\n";
-            }
+            valuePos = text.find("=");
+            value = text.substr(valuePos + 1);
 
-            cout << text << endl;
+            cout << value << endl;
 
         }
         
