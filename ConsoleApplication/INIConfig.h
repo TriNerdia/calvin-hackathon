@@ -9,6 +9,7 @@ class INIConfig
 {
 public:
 
+	static std::list<std::string> getSections(std::string);
 	static std::map<std::string, std::string> getSectionVars(std::string, std::string);
 
 private:
