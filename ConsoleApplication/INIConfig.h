@@ -3,21 +3,17 @@
 
 #include <string>
 #include <list>
+#include <map>
 
 class INIConfig
 {
 public:
-	INIConfig(std::string filename);
-	~INIConfig();
 
-	// Lists
-	std::list<std::string> getVariables(std::string section);
-	std::list<std::string> getSections();
+	static std::list<std::string> getSections(std::string);
+	static std::map<std::string, std::string> getSectionVars(std::string, std::string);
 
-	// Single Values
-	std::string getValue(std::string section, std::string variable);
-
-	std::string iniValue(char* argv[]);
+private:
+	INIConfig() {}
 };
 
 #endif // !_INI_CONFIG_
