@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <algorithm>
 
 using namespace std;
 
@@ -26,6 +27,10 @@ int main(int argc, char *argv[])
         string text;
         while (getline(config, text))
         {
+            text.erase(remove_if(text.begin(), text.end(), isspace), text.end());
+
+            if (text[0] == '#' || text.empty())
+                continue;
 
             if (text == "Yes")
             {
