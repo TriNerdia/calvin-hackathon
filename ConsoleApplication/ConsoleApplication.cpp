@@ -32,8 +32,7 @@ int main(int argc, char *argv[])
 		std::cout << "Port Check: " << (result ? "True" : "False") << std::endl;
 	}
 	else if (test == "testweb") {
-		std::string url = variables["proto"] + "://" + general["hostname"] + ":" + variables["port"] + variables["url"];
-		result = AppCheckTests::http_get_string(url, variables["search"]);
+		result = AppCheckTests::http_get_string(variables["domain"], variables["search"]);
 		std::cout << "============" << std::endl;
 		std::cout << "Web Check: " << (result ? "True" : "False") << std::endl;
 	}
