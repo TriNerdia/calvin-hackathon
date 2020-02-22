@@ -4,7 +4,7 @@
 #include <fstream>
 #include <algorithm>
 
-std::map<std::string, std::string> INIConfig::parseConfig(std::string filename, std::string section)
+std::map<std::string, std::string> INIConfig::getSectionVars(std::string filename, std::string section)
 {
     std::string line;
     std::map<std::string, std::string> variables;

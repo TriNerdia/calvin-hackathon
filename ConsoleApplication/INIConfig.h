@@ -9,7 +9,7 @@ class INIConfig
 {
 public:
 
-	static std::map<std::string, std::string> parseConfig(std::string, std::string);
+	static std::map<std::string, std::string> getSectionVars(std::string, std::string);
 
 private:
 	INIConfig() {}
