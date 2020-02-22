@@ -47,3 +47,36 @@ std::map<std::string, std::string> INIConfig::parseConfig(std::string filename, 
     return variables;
 }
 
+std::list<std::string> INIConfig::getSections(std::string filename)
+{
+    std::string line;
+    std::list<std::string> sections;
+
+    std::ifstream file(filename);
+    if (file.is_open()) {
+        while (getline(file, line)) {
+            if (line.empty() || (line.length() > 0 && line[0] == '#')) {
+                continue;
+            }
+
+            if (line[0] == '[') {
+                //look_for_variables = false;
+
+                // Cleaning up the string
+                line.erase(std::remove_if(line.begin(), line.end(), ispunct), line.end());
+
+                sections.push_back(line);
+
+                    
+            }
+        }
+
+        file.close();
+    }
+
+
+
+    return sections;
+}
+
+
