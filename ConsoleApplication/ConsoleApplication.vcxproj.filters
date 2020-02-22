@@ -21,9 +21,15 @@
     <ClCompile Include="AppCheckTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="INIConfig.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppCheckTests.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="INIConfig.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
